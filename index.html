@@ -15,19 +15,64 @@
       <h1>Weather Dashboard</h1>
     </header>
     <main>
-      <!-- Search sidebar -->
-      <aside id="searchEl">
-        <h2>searchEl placeholder</h2>
-      </aside>
+      <div id="mainContent">
+        <!-- Search sidebar -->
+        <aside id="searchEl">
+          <h2>Search for a City:</h2>
+        </aside>
 
-      <!-- Current city weather -->
-      <div id="cityEl">
-        <h2>cityEl placeholder</h2>
-      </div>
+        <!-- Forecast container -->
+        <div id="forecastContainer">
+          <!-- Current city weather -->
+          <div id="cityEl">
+            <h2>CityName (3/22/2024) (icon)</h2>
+            <p>Temp: 70 F</p>
+            <p>Wind: 5 MPH</p>
+            <p>Humidity: 30 %</p>
+          </div>
 
-      <!-- 5-Day forecast -->
-      <div id="forecastEl">
-        <h3>forecastEl placeholder</h3>
+          <!-- 5-Day forecast -->
+          <h3>5-Day Forecast:</h3>
+          <div id="forecastEl">
+            <div id="cardContainer">
+              <div id="day1" class="dayCard">
+                <h3>3/23/2024</h3>
+                <div>(icon)</div>
+                <p>Temp: 72 F</p>
+                <p>Wind: 5 MPH</p>
+                <p>Humidity: 32 %</p>
+              </div>
+              <div id="day2" class="dayCard">
+                <h3>3/24/2024</h3>
+                <div>(icon)</div>
+                <p>Temp: 74 F</p>
+                <p>Wind: 5 MPH</p>
+                <p>Humidity: 34 %</p>
+              </div>
+              <div id="day3" class="dayCard">
+                <h3>3/25/2024</h3>
+                <div>(icon)</div>
+                <p>Temp: 76 F</p>
+                <p>Wind: 5 MPH</p>
+                <p>Humidity: 36 %</p>
+              </div>
+              <div id="day4" class="dayCard">
+                <h3>3/26/2024</h3>
+                <div>(icon)</div>
+                <p>Temp: 78 F</p>
+                <p>Wind: 5 MPH</p>
+                <p>Humidity: 38 %</p>
+              </div>
+              <div id="day5" class="dayCard">
+                <h3>3/27/2024</h3>
+                <div>(icon)</div>
+                <p>Temp: 80 F</p>
+                <p>Wind: 5 MPH</p>
+                <p>Humidity: 40 %</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <script src="./Assets/JS/script.js"></script>
