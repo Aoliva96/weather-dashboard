@@ -1,0 +1,43 @@
+/* Global */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+header {
+  background-image: linear-gradient(to left, #291964, #4459b7);
+  height: 4rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+header h1 {
+  margin-right: 20rem;
+  color: white;
+}
+
+/* Main content */
+main {
+  outline: 2px solid purple; /* <- debug placeholder */
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* Search sidebar */
+#searchEl {
+  outline: 2px solid green; /* <- debug placeholder */
+  flex: 1 0 20%;
+}
+
+/* Current city weather */
+#cityEl {
+  outline: 2px solid black;
+  flex: 3 0 80%;
+}
+
+/* 5-Day forecast */
+#forecastEl {
+  outline: 2px solid red; /* <- debug placeholder */
+  flex: 3 0 80%;
+}
