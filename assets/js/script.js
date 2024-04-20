@@ -1,15 +1,42 @@
-// TODO: Searchbar (search for city, change forecast to that city, & add city to search history)
-// TODO: Search History (update displayed weather data on click)
+// Handle form data
+const form = document.getElementById("cityForm");
+const searches = JSON.parse(localStorage.getItem("city-searches")) || [];
+
+localStorage.setItem("city-searches", JSON.stringify(searches));
+
+function updateButtons() {
+  // Clear existing history buttons
+  // Add buttons back based on searches array
+}
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const newSearch = document.getElementById("citySearch").value;
+
+  city = newSearch;
+  searches.push(newSearch);
+  localStorage.setItem("city-search:", JSON.stringify(searches));
+
+  updateButtons();
+  form.reset();
+});
+
+form.addEventListener("button", function (event) {
+  event.preventDefault();
+  // Update value of city variable to clicked history button
+});
 
 // Form data placeholder values
 let city = "Oakland";
 let country = "US";
 let limit = 1;
 
+console.log("city global:", city);
+
+// Global API data storage
 const APIKey = "4c08af06a21cfe76c7e6e95c093d982f";
 const geoQuery = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=${limit}&appid=${APIKey}`;
 
-// Global API data storage
 let geoData = [];
 let weatherData = [];
 let forecastData = [];

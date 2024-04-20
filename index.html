@@ -19,6 +19,34 @@
         <!-- Search sidebar -->
         <aside id="searchEl">
           <h2>Search for a City:</h2>
+          <form id="cityForm">
+            <ul>
+              <li>
+                <label for="citySearch"></label>
+                <input
+                  type="text"
+                  id="citySearch"
+                  name="citySearch"
+                  placeholder="Search..."
+                />
+              </li>
+              <li>
+                <button type="submit" onclick="alert('City Search Button')">
+                  Search
+                </button>
+              </li>
+              <li><hr /></li>
+              <li>
+                <button
+                  class="historyBtn"
+                  type="button"
+                  onclick="alert('Search History Button')"
+                >
+                  Placeholder
+                </button>
+              </li>
+            </ul>
+          </form>
         </aside>
 
         <!-- Forecast container -->
