@@ -25,6 +25,36 @@ header h1 {
   color: white;
 }
 
+/* Alert Banner */
+#alert {
+  height: 3.2rem;
+  padding: 5px;
+  background-color: orangered;
+  border: solid 1px black;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#message {
+  color: black;
+  margin: auto;
+}
+
+#close {
+  color: black;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  font-size: 24px;
+}
+
+#close:hover {
+  color: white;
+  border: solid 1px white;
+  cursor: pointer;
+}
+
 /* Main content */
 #mainContent {
   padding: 1rem;
@@ -116,8 +146,13 @@ hr {
   flex: 0 1 auto;
 }
 
-#cityEl h2 {
+.title {
   margin-top: 0;
+  margin-bottom: -0.5rem;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
 }
 
 #cityEl img {

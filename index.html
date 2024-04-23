@@ -14,6 +14,14 @@
     <header>
       <h1>Weather Dashboard</h1>
     </header>
+    <div id="alert">
+      <div id="message">
+        <p>Placeholder Error Message!</p>
+      </div>
+      <div>
+        <button id="close">X</button>
+      </div>
+    </div>
     <main>
       <div id="mainContent">
         <!-- Search sidebar -->
@@ -31,29 +39,22 @@
                 />
               </li>
               <li>
-                <button type="submit" onclick="alert('City Search Button')">
-                  Search
-                </button>
+                <button type="submit" id="searchBtn">Search</button>
               </li>
               <li><hr /></li>
               <li>
-                <button
-                  class="historyBtn"
-                  type="button"
-                  onclick="alert('Search History Button')"
-                >
-                  Placeholder
-                </button>
+                <button class="historyBtn" type="button">Placeholder</button>
               </li>
             </ul>
           </form>
         </aside>
 
         <!-- Forecast container -->
-        <div id="forecastContainer">
+        <div id="forecastContainer" style="visibility: hidden">
           <!-- Current city weather -->
           <div id="cityEl">
             <h2 class="title"></h2>
+            <p class="subtitle"></p>
             <p class="t">Temp:</p>
             <p class="w">Wind:</p>
             <p class="h">Humidity:</p>
