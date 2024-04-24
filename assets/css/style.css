@@ -31,7 +31,7 @@ header h1 {
   padding: 5px;
   background-color: orangered;
   border: solid 1px black;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -53,6 +53,12 @@ header h1 {
   color: white;
   border: solid 1px white;
   cursor: pointer;
+}
+
+/* Element hider */
+.hider {
+  visibility: hidden !important;
+  display: none !important;
 }
 
 /* Main content */
@@ -93,6 +99,38 @@ input {
   padding-right: 0.5rem;
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+#selectContainer {
+  position: relative;
+}
+
+#selectContainer::before,
+#selectContainer::after {
+  --size: 0.3rem;
+  position: absolute;
+  content: "";
+  right: 1rem;
+  pointer-events: none;
+}
+
+#selectContainer::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid grey;
+  top: 50%;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: white;
+  border: 1px solid #aeaeae;
+  border-radius: 0.4rem;
+  color: grey;
+  cursor: pointer;
 }
 
 button {

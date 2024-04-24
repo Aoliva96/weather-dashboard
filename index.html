@@ -14,9 +14,9 @@
     <header>
       <h1>Weather Dashboard</h1>
     </header>
-    <div id="alert">
+    <div id="alert" class="hider">
       <div id="message">
-        <p>Placeholder Error Message!</p>
+        <p><!-- Alert text --></p>
       </div>
       <div>
         <button id="close">X</button>
@@ -39,18 +39,35 @@
                 />
               </li>
               <li>
+                <div id="selectContainer">
+                  <select name="units" id="units">
+                    <option value="imperial" style="display: none">
+                      Measurement units...
+                    </option>
+                    <option value="imperial">Imperial ( °F )</option>
+                    <option value="metric">Metric ( °C )</option>
+                  </select>
+                </div>
+              </li>
+              <li>
                 <button type="submit" id="searchBtn">Search</button>
               </li>
               <li><hr /></li>
+              <div id="historyContainer">
+                <!-- Dynamic buttons append here -->
+              </div>
+              <li><hr /></li>
               <li>
-                <button class="historyBtn" type="button">Placeholder</button>
+                <button id="clearBtn" type="button">
+                  Clear Search History
+                </button>
               </li>
             </ul>
           </form>
         </aside>
 
         <!-- Forecast container -->
-        <div id="forecastContainer" style="visibility: hidden">
+        <div id="forecastContainer" class="hider">
           <!-- Current city weather -->
           <div id="cityEl">
             <h2 class="title"></h2>
