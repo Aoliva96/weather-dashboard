@@ -1,5 +1,3 @@
-// TODO: Bugfix testing, fix city name capitalization in search history or localStorage
-
 // New alert banner function
 function newAlert(text) {
   const alertElement = document.getElementById("alert");
@@ -23,7 +21,6 @@ function hider(element) {
   } else {
     element.classList.remove("hider");
   }
-  // console.log(`Toggled hider(); on ${element.id}`);
 }
 
 // Handle form data
@@ -36,32 +33,38 @@ const toggleImp = document.getElementById("toggleImperial");
 const toggleMet = document.getElementById("toggleImperial");
 let unitSetting = "imperial";
 
-console.log("Search history:", searches);
-
 // Update history from localStorage
 updateHistory(searches);
 
 // Set up button handlers
 function searchButtonHandler() {
-  const newSearch = document.getElementById("citySearch").value;
   unitSetting = document.getElementById("units").value;
 
-  if (!newSearch) {
+  // Capitalize search if present
+  const rawSearch = document.getElementById("citySearch").value;
+  if (!rawSearch) {
     newAlert("City name is required for new forecast.");
     return;
   }
+  const splitSearch = rawSearch.split(" ");
+  for (let i = 0; i < splitSearch.length; i++) {
+    splitSearch[i] = splitSearch[i][0].toUpperCase() + splitSearch[i].substr(1);
+  }
+  const newSearch = splitSearch.join(" ");
 
-  if (searches.includes(newSearch)) {
-    console.log(`${newSearch} is a duplicate, not added to search history.`);
-  } else {
+  // User input validation
+  const inputVal = /^[a-zA-Z\s]+$/.test(newSearch);
+  city = newSearch;
+
+  if (!inputVal) {
+    newAlert("Please enter a valid city name.");
+    return;
+  }
+  if (!searches.includes(newSearch)) {
     searches.push(newSearch);
-    localStorage.setItem("city-searches", JSON.stringify(searches));
-    console.log(`${newSearch} added to search history`);
   }
 
-  city = newSearch;
-  console.log("New searches array:", searches);
-
+  // Fetch API data
   fetchData(newSearch);
   updateHistory(searches);
 
@@ -70,19 +73,18 @@ function searchButtonHandler() {
 }
 
 function historyButtonHandler(historySearch) {
-  console.log(`${historySearch} history button clicked`);
   unitSetting = document.getElementById("units").value;
-
   city = historySearch;
+
   fetchData(historySearch);
   form.reset();
   return city, unitSetting;
 }
 
 function clearButtonHandler() {
-  console.log("Clear history button clicked");
   localStorage.clear();
   searches = [];
+
   updateHistory(searches);
   form.reset();
 }
@@ -90,16 +92,12 @@ function clearButtonHandler() {
 // Function to generate history buttons
 function updateHistory(searchHistory) {
   const container = document.getElementById("historyContainer");
-  // const dividers = document.querySelectorAll("hr");
 
   container.innerHTML = "";
   let buttons = [];
   buttons = Array.from(searchHistory);
 
   if (buttons.length === 0) {
-    // hider(dividers[0]);
-    // hider(dividers[1]);
-    // hider(clearBtn);
     clearBtn.classList.add("hider");
   } else {
     clearBtn.classList.remove("hider");
@@ -112,6 +110,11 @@ function updateHistory(searchHistory) {
     button.textContent = element;
     button.classList.add("historyBtn");
     button.type = "button";
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+      historyButtonHandler(element);
+    });
+
     li.appendChild(button);
     container.appendChild(li);
   });
@@ -128,28 +131,20 @@ clearBtn.addEventListener("click", function (event) {
   clearButtonHandler();
 });
 
-Array.from(history).forEach(function (button) {
-  let buttonName = button.textContent;
-
-  button.addEventListener("click", function (event) {
-    event.preventDefault();
-    historyButtonHandler(buttonName);
-  });
-});
-
 // Global API data storage
 const APIKey = "4c08af06a21cfe76c7e6e95c093d982f";
 
 let geoData = [];
 let weatherData = [];
 let forecastData = [];
-
-let tempUnit;
-let windUnit;
+let tempUnit, windUnit;
 
 // Function for calling APIs
 async function fetchData(city) {
   try {
+    // Add successful search to history
+    localStorage.setItem("city-searches", JSON.stringify(searches));
+
     // API call for geolocation data
     const geoQuery = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKey}`;
     const geoResponse = await fetch(geoQuery);
@@ -251,7 +246,7 @@ async function fetchData(city) {
       return index % 8 == 0;
     });
 
-    // NOTE: Above filter method is fragile, only returns every 8th element, equivalent to 24hr intervals. Ideally, filter would target 'date' objects for each element specifically.
+    // NOTE: Above filter method is fragile, only returns every 8th element, equivalent to 24hr intervals. Better version may be implemented in the future.
 
     // Render current weather HTML
     if (unitSetting === "imperial") {
@@ -310,8 +305,15 @@ async function fetchData(city) {
     geoData = [];
     weatherData = [];
     forecastData = [];
+
+    return searches;
   } catch (error) {
+    // Remove invalid search from search history
+    searches.pop();
+    localStorage.setItem("city-searches", JSON.stringify(searches));
+
+    updateHistory(searches);
     newAlert(`No weather data found for "${city}"`);
-    console.error("Error fetching data:", error);
+    return searches;
   }
 }
