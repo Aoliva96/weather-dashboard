@@ -146,7 +146,7 @@ async function fetchData(city) {
     localStorage.setItem("city-searches", JSON.stringify(searches));
 
     // API call for geolocation data
-    const geoQuery = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKey}`;
+    const geoQuery = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKey}`;
     const geoResponse = await fetch(geoQuery);
     const geoJson = await geoResponse.json();
     const cityName = geoJson[0].name;
@@ -177,8 +177,8 @@ async function fetchData(city) {
     }
 
     // Generate API queries w/ geoData
-    const weatherQuery = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${unitSetting}&appid=${APIKey}`;
-    const forecastQuery = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${unitSetting}&appid=${APIKey}`;
+    const weatherQuery = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${unitSetting}&appid=${APIKey}`;
+    const forecastQuery = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${unitSetting}&appid=${APIKey}`;
 
     // API call for current weather data
     const weatherResponse = await fetch(weatherQuery);
